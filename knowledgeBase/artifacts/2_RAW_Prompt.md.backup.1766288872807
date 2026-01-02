@@ -1,0 +1,20 @@
+# Feature: RAW Prompt Input (Tab 2)
+
+**Version**: v1.20 (2025-12-04)
+**User Interface**: The "RAW" tab in the extension overlay.
+**Goal**: Direct text input for prompts with template support and slot saving.
+
+### v1.20 Note
+- No changes to RAW flow; version aligned with manifest/metadata. Playlist/unified storage updates do not affect this tab.
+
+### Primary Manager: `UIRawInputManager.js`
+-   **Location**: `src/content/managers/ui/UIRawInputManager.js`
+-   **Responsibilities**:
+    -   **Text Input**: Manages the main textarea for raw prompt entry.
+    -   **Saved Slots**: Manages 4 quick-save slots for storing prompts.
+    -   **Templates**: Integrates with the template system to insert reusable snippets.
+    -   **Preview**: Generates a preview of the final prompt (processing macros/templates).
+    -   **Silent Mode**: Appends silent mode suffixes if enabled.
+-   **Key Dependencies**:
+    -   `AdvancedRawInputManager.js`: Likely handles complex text processing/macros.
+    -   `StateManager.js`: Persists saved slots.

@@ -1,0 +1,133 @@
+{
+    "title": "Grok Video Prompter Extension",
+    "summary": "Chrome extension for advanced prompt management, bulk video generation automation, and persistent video history tracking on Grok.com. Features include JSON/RAW prompt editors, template system, upload automation, Quick Edit/Quick Video modes, Gallery Automation (Spicy Mode, Quick Raw/JSON, Upscale Mode), unified video storage (IndexedDB), per-account history, and playlist management. v1.21.47: ImagineGod integration - Job Queue System, Generation Rail Status UI, centralized selectors, and React compatibility fixes.",
+    "version": "1.21.47",
+    "lastUpdated": "2025-12-30",
+    "artifacts": [
+        {
+            "type": "file",
+            "value": "src/content/managers/StateManager.js",
+            "description": "Centralized state management and data persistence"
+        },
+        {
+            "type": "file",
+            "value": "src/content/constants/selectors.js",
+            "description": "Centralized DOM selector constants"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/JobQueueManager.js",
+            "description": "Background persistent job queue for upscale/unlike tasks"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/ui/UIGenerationRailManager.js",
+            "description": "Generation Status Rail UI overlay"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/IndexedDBManager.js",
+            "description": "IndexedDB operations for unified video history and gallery data"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/NetworkInterceptor.js",
+            "description": "API interception, account detection, and unified storage ingestion"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/UIManager.js",
+            "description": "Main UI orchestrator, Quick Launch toggles, Gallery Automation, and history tab rendering"
+        },
+        {
+            "type": "file",
+            "value": "src/content/content.js",
+            "description": "Entry point, Quick Launch manager, Quick Video click detection"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/ui/UIFormManager.js",
+            "description": "JSON editor tab dynamic form generation"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/ui/UIRawInputManager.js",
+            "description": "RAW prompt tab, saved slots with custom naming, inline editing"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/ui/UIUploadManager.js",
+            "description": "Upload queue UI component"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/ui/UIPlaylistManager.js",
+            "description": "History/playlist tab and video player"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/AutomaticRetryManager.js",
+            "description": "Auto-retry for moderated generations with triple guard protection"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/UploadAutomationManager.js",
+            "description": "Upload mode automation logic"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/StorageManager.js",
+            "description": "Chrome storage operations for settings"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/UIProgressAPI.js",
+            "description": "API-based progress tracking"
+        },
+        {
+            "type": "file",
+            "value": "src/content/managers/ReactAutomation.js",
+            "description": "React UI interaction automation (reactClick, sendToGenerator, field filling)"
+        },
+        {
+            "type": "file",
+            "value": "manifest.json",
+            "description": "Extension manifest (MV3)"
+        },
+        {
+            "type": "file",
+            "value": "knowledge/grok_video_prompter/artifacts/6_Quick_Video_Feature.md",
+            "description": "Quick Video from Edit automation feature documentation"
+        },
+        {
+            "type": "file",
+            "value": "knowledge/grok_video_prompter/artifacts/7_Gallery_Automation.md",
+            "description": "Gallery Automation features (Spicy Mode, Quick Raw/JSON, Upscale Mode)"
+        },
+        {
+            "type": "file",
+            "value": "knowledge/grok_video_prompter/artifacts/8_Toast_System.md",
+            "description": "Toast Notification System API, implementation patterns, and mandatory checklist"
+        },
+        {
+            "type": "file",
+            "value": "knowledge/grok_video_prompter/artifacts/9_Unified_Storage_Architecture.md",
+            "description": "Detailed documentation of Unified Storage System and current limitations"
+        },
+        {
+            "type": "file",
+            "value": "knowledge/grok_video_prompter/artifacts/10_Upload_Mode_Flow.md",
+            "description": "Upload Mode canonical flow, payload structure, URL formats, and moderation distinction"
+        },
+        {
+            "type": "file",
+            "value": "knowledge/grok_video_prompter/artifacts/11_Deep_Dive_History_Storage_QuickModes.md",
+            "description": "Deep-dive diagrams for IndexedDB unified storage, History Tab data flow, and Quick Raw/JSON automation"
+        },
+        {
+            "type": "file",
+            "value": "knowledge/grok_video_prompter/artifacts/12_Logging_System.md",
+            "description": "Documentation for the Unified Logging System (GVPLogger), debugging toggle, and migration guide"
+        }
+    ]
+}

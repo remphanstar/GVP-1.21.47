@@ -1,0 +1,69 @@
+# Core Infrastructure & Shared UI
+
+**Version**: v1.20.5 (2025-12-10)
+**Goal**: Orchestrate the extension, manage state, and provide shared UI components.
+
+### Session Updates (2025-12-10)
+- **Quick Video from Edit (v1.20.5)**: New 🎥 toggle button automates video generation from edited images. See `artifacts/6_Quick_Video_Feature.md` for full details.
+- **Quick Edit (v1.20.4)**: 🖼 ImgEdit button automates image editing via `sendToImageEdit()` in ReactAutomation.js.
+
+### Session Updates (2025-12-05)
+- JSON presets: Create/update now keeps the name populated and focused in the preset input; warns if unnamed; auto-selects after save.
+- Visual Details objects: Custom presets persist to IndexedDB; “Custom…” inline entry; object strings normalized to `Name: ` with colon + space.
+- View JSON modal: Taller default (min ~640px, up to 90vh) with improved readability.
+- Template normalization: Repairs missing `fieldPath`/name in stored templates to avoid skips.
+
+### Main Orchestrator: `UIManager.js`
+    -   **Initialization**: Instantiates all other UI managers.
+    -   **Shadow DOM**: Creates and manages the extension's isolated DOM.
+    -   **Global Events**: Listens for mode changes (Upload, Aurora, Wrap).
+    -   **Toast Notifications**: Provides a central `showToast` method.
+
+### State Management: `StateManager.js`
+-   **Location**: `src/content/managers/StateManager.js`
+-   **Responsibilities**:
+    -   Centralized state store (presets, settings, history).
+    -   **Unified Storage**: Manages the `unifiedHistory` store in IndexedDB (via `IndexedDBManager`).
+    -   **Account Isolation**: Ensures data is strictly segregated by Account ID.
+    -   **Persists data**: Uses IndexedDB for heavy data (videos) and Chrome Storage for settings.
+    -   **[LEGACY] Gallery store**: Old gallery store persistence is superseded by Unified Storage and should not be re-enabled.
+
+### Network & Automation: `NetworkInterceptor.js`
+-   **Location**: `src/content/managers/NetworkInterceptor.js`
+-   **Responsibilities**:
+    -   **Request Capture**: Intercepts `fetch` requests to monitor Grok API traffic.
+    -   **Multi-Gen Tracking**: Captures generation requests (`/rest/app-chat/conversations/new`) to build the history.
+    -   **/list Ingestion**: When `listIngestionEnabled` is on, backfills Unified Store with parent image metadata and child video fields (URLs, prompts, model, resolution, timestamps, thumbnails).
+    -   **Automation Integration**: Notifies `UploadAutomationManager` of generation start/success/failure events.
+    -   **Metadata Extraction**: Parses payloads to find Image IDs, Account IDs, and Prompts.
+    -   **Retry Logic**: Integrates with `AutomaticRetryManager` for resilience.
+
+### Shared Components
+-   **`UIModalManager.js`**: Centralized manager for all overlay dialogs.
+    -   **Fullscreen Editor**: For editing long text fields (Motion, Visual Details).
+    -   **Prompt History**: Shows past prompts for a specific image.
+    -   **JSON Tools**: Modals for Viewing and Importing JSON presets.
+    -   **Saved Prompts**: UI for managing RAW mode saved slots.
+-   **`UITabManager.js`**: Manages the switching between JSON, RAW, Upload, and Playlist tabs.
+-   **`UIStatusManager.js`**: Likely manages a status bar or global status indicators.
+-   **`UIHelpers.js`**: Utility functions for DOM manipulation and common UI patterns.
+
+## Directory Structure Reference
+```
+src/
+├── content/
+│   ├── managers/
+│   │   ├── ui/                 # UI-specific Managers
+│   │   │   ├── UIManager.js
+│   │   │   ├── UIFormManager.js
+│   │   │   ├── UIRawInputManager.js
+│   │   │   ├── UIUploadManager.js
+│   │   │   ├── UIPlaylistManager.js
+│   │   │   ├── UIModalManager.js
+│   │   │   ├── UITabManager.js
+│   │   │   └── ...
+│   │   ├── StateManager.js     # Data Persistence
+│   │   ├── UploadAutomationManager.js
+│   │   └── ...
+│   └── content.js              # Entry Point
+```
